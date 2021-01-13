@@ -1,0 +1,28 @@
+server:
+  port: 8006
+
+spring:
+  application:
+    name: consul-provider-payment
+  cloud:
+    consul:
+      host: 192.168.15.217
+      #       host: 192.168.11.135
+      port: 8500
+      enabled: true
+      config:
+        enabled: true  #默认是true
+        format: YAML   # 表示consul上面文件的格式 有四种 YAML PROPERTIES KEY-VALUE FILES
+        data-key: configuration   #表示consul上面的KEY值(或者说文件的名字) 默认是data
+        acl-token:
+      discovery:
+        enabled: true
+        #instanceId: ${spring.application.name}-${spring.cloud.consul.host}-${spring.cloud.consul.port}
+        hostname: 192.168.29.40 #默认不用配置
+        serviceName: ${spring.application.name}
+        health-check-interval: 5s
+        healthCheckPath: /actuator/health
+management:
+  endpoint:
+    health:
+      show-details: always
